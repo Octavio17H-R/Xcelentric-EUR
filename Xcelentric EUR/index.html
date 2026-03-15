@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="Style.css">
+    <meta charset="UTF-8">
+    <title>Xcelentric - Calculadora</title>
+
+</head>
+
+<body>
+<div class="container">
+<div class="header-title">
+    <div class="title-logo-left">
+        <img src="Logo Xcelentric.png" alt="Logo Xcelentric">
+    </div>
+
+<div class="title-container">
+    <div class="title-main">Calculadora de Rentabilidad</div>
+    <div class="title-subtitle">Compara fácilmente escenarios para encontrar la inversión adecuada para tu negocio</div>
+    <div class="title-disclaimer">Para fines demostrativos únicamente</div>
+</div>
+
+    <div class="title-logo-right">
+        <img src="https://xcelentric.com/wp-content/uploads/2024/08/abeja_v5-300x280.png" alt="Logo Abeja">
+    </div>
+</div>
+<!-- ================= RESUMEN PRINCIPAL – MODELOS DE INGRESO ================= -->
+<div class="summary-box">
+    <!-- HEADER -->
+<h3 style="margin-bottom: 0; padding-bottom: 0;">Premisas de Financieras</h3>
+<div class="summary-header" style="margin-top: 0;">
+    <small class="currency-label" style="display: block; margin-top: -5px;">
+        Tipo de Moneda: EUR (€)
+    </small>
+</div>
+.
+<div class="simulation-controls">
+
+    <div class="scenario-section-box">
+        <h3 class="scenario-title">Número de Tomas</h3>
+        <div class="scenario-controls">
+            <div class="sc-item">
+                <span class="sc-label">Pesimista</span>
+                <input type="range" id="ctrl_p" min="1" max="12" value="2" oninput="syncScenario('p', this.value)">
+                <span id="val_p" class="slider-value">2</span>
+            </div>
+            <div class="sc-item">
+                <span class="sc-label">Base</span>
+                <input type="range" id="ctrl_b" min="1" max="12" value="4" oninput="syncScenario('b', this.value)">
+                <span id="val_b" class="slider-value">4</span>
+            </div>
+            <div class="sc-item">
+                <span class="sc-label">Optimista</span>
+                <input type="range" id="ctrl_o" min="1" max="12" value="6" oninput="syncScenario('o', this.value)">
+                <span id="val_o" class="slider-value">6</span>
+            </div>
+        </div>
+    </div>
+        <div class="scenario-section-box">
+    <h3 class="scenario-title">Velocidad de Carga (kW)</h3>
+    <div class="scenario-controls">
+        <div class="sc-item">
+            <span class="sc-label">Pesimista</span>
+            <input type="range"
+            id="ctrl_v11_p"
+            min="0"
+            max="7"
+            step="1"
+            value="1"
+            oninput="syncVelocidad('p', this.value)">
+            <span id="val_v11_p" class="slider-value">7.4 kW</span>
+        </div>
+        <div class="sc-item">
+            <span class="sc-label">Base</span>
+            <input type="range"
+            id="ctrl_v11_b"
+            min="0"
+            max="7"
+            step="1"
+            value="3"
+            oninput="syncVelocidad('b', this.value)">
+            <span id="val_v11_b" class="slider-value">22 kW</span>
+        </div>
+        <div class="sc-item">
+            <span class="sc-label">Optimista</span>
+            <input type="range"
+            id="ctrl_v11_o"
+            min="0"
+            max="7"
+            step="1"
+            value="4"
+            oninput="syncVelocidad('o', this.value)">
+            <span id="val_v11_o" class="slider-value">28 kW</span>
+        </div>
+    </div>
+    </div>
+    <div class="scenario-section-box">
+        <h3 class="scenario-title">Valor Inicial de Cajón de Estacionamiento</h3>
+        <div class="scenario-controls">
+            <div class="sc-item">
+                <span class="sc-label">Pesimista</span>
+                <input type="range" id="ctrl_v9_p" min="2500" max="10000" step="250" value="5000" oninput="syncValorPlaza('p', this.value)">
+                <span id="val_v9_p" class="slider-value">€5,000</span>
+            </div>
+            <div class="sc-item">
+                <span class="sc-label">Base</span>
+                <input type="range" id="ctrl_v9_b" min="2500" max="10000" step="250" value="5000" oninput="syncValorPlaza('b', this.value)">
+                <span id="val_v9_b" class="slider-value">€5,000</span>
+            </div>
+            <div class="sc-item">
+                <span class="sc-label">Optimista</span>
+                <input type="range" id="ctrl_v9_o" min="2500" max="10000" step="250" value="5000" oninput="syncValorPlaza('o', this.value)">
+                <span id="val_v9_o" class="slider-value">€5,000</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="scenario-section-box">
+        <h3 class="scenario-title">Precio de Venta (EUR/kWh)</h3>
+        <div class="scenario-controls">
+            <div class="sc-item">
+                <span class="sc-label">Pesimista</span>
+                <input type="range" min="0" max="12" step="0.1" value="0.40" oninput="syncInput('v4_p', this.value); document.getElementById('val_price_p').textContent = this.value;">
+                <span class="slider-value" id="val_price_p">0.40</span>
+            </div>
+            <div class="sc-item">
+                <span class="sc-label">Base</span>
+                <input type="range" min="0" max="12" step="0.1" value="0.45" oninput="syncInput('v4_b', this.value); document.getElementById('val_price_b').textContent = this.value;">
+                <span class="slider-value" id="val_price_b">0.45</span>
+            </div>
+            <div class="sc-item">
+                <span class="sc-label">Optimista</span>
+                <input type="range" min="0" max="12" step="0.1" value="0.50" oninput="syncInput('v4_o', this.value); document.getElementById('val_price_o').textContent = this.value;">
+                <span class="slider-value" id="val_price_o">0.50</span>
+            </div>
+        </div>
+    </div>
+<div class="scenario-section-box">
+    <h3 class="scenario-title">Costo de Electricidad (EUR/kWh)</h3>
+    <div class="scenario-controls">
+        <div class="sc-item">
+            <span class="sc-label">Pesimista</span>
+            <input type="range" id="ctrl_v5_p" min="0" max="20" step="0.1" value="0.25" oninput="syncCosto('p', this.value)">
+            <span id="val_v5_p" class="slider-value">0.25</span>
+        </div>
+        <div class="sc-item">
+            <span class="sc-label">Base</span>
+            <input type="range" id="ctrl_v5_b" min="0" max="20" step="0.1" value="0.20" oninput="syncCosto('b', this.value)">
+            <span id="val_v5_b" class="slider-value">0.20</span>
+        </div>
+        <div class="sc-item">
+            <span class="sc-label">Optimista</span>
+            <input type="range" id="ctrl_v5_o" min="0" max="20" step="0.1" value="0.15" oninput="syncCosto('o', this.value)">
+            <span id="val_v5_o" class="slider-value">0.15</span>
+        </div>
+    </div>
+</div>
+<div class="scenario-section-box">
+    <h3 class="scenario-title">% de Utilización Diaria</h3>
+    <div class="scenario-controls">
+        <div class="sc-item">
+            <span class="sc-label">Pesimista</span>
+            <input type="range" id="ctrl_v2_p" min="1" max="30" step="1" value="3" oninput="syncUtilizacion('p', this.value)">
+            <span id="val_v2_p" class="slider-value">3%</span>
+        </div>
+        <div class="sc-item">
+            <span class="sc-label">Base</span>
+            <input type="range" id="ctrl_v2_b" min="1" max="30" step="1" value="5" oninput="syncUtilizacion('b', this.value)">
+            <span id="val_v2_b" class="slider-value">5%</span>
+        </div>
+        <div class="sc-item">
+            <span class="sc-label">Optimista</span>
+            <input type="range" id="ctrl_v2_o" min="1" max="30" step="1" value="7" oninput="syncUtilizacion('o', this.value)">
+            <span id="val_v2_o" class="slider-value">7%</span>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+    <!-- RESULTADOS -->
+   <div class="triple-summary">
+
+    <div class="summary-card">
+        <h4>1. Venta de Electricidad</h4>
+        <div class="card-detail-list">
+            <span><strong id="det_kwh_b">0</strong> kWh/mes</span>
+            <span>Margen: <strong id="det_margin_b">0%</strong></span>
+        </div>
+
+        <table>
+            <tr><th>PESIMISTA</th><th>BASE</th><th>OPTIMISTA</th></tr>
+            <tr>
+                <td id="kpi_u_p">€0</td>
+                <td id="kpi_u_b">€0</td>
+                <td id="kpi_u_o">€0</td>
+            </tr>
+        </table>
+        <p class="desc">Utilidad neta mensual tras gastos y royalties.</p>
+    </div>
+
+    <div class="summary-card highlight">
+        <h4>2. Plusvalía del Activo (Exit)</h4>
+        <div class="card-detail-list">
+            <span>Payback: <strong id="det_payback_b">0 meses</strong></span>
+            <span>Multiplicador: <strong id="det_plus_b">0x</strong></span>
+        </div>
+
+        <table>
+            <tr><th>PESIMISTA</th><th>BASE</th><th>OPTIMISTA</th></tr>
+            <tr>
+                <td id="kpi_x_p">€0</td>
+                <td id="kpi_x_b">€0</td>
+                <td id="kpi_x_o">€0</td>
+            </tr>
+        </table>
+        <small>
+            Inversión: <span id="pv_inv_b"></span> · 
+            Horizonte: <span id="pv_t_b">5 años</span>
+        </small>
+    </div>
+
+    <div class="summary-card">
+        <h4>3. Comisiones y Referidos</h4>
+        <div class="card-detail-list">
+            <span>Referidos: <strong id="det_ref_b">0</strong> uds.</span>
+            <span>Variable: <strong id="det_com_var_b">€0</strong></span>
+        </div>
+
+        <table>
+            <tr><th>PESIMISTA</th><th>BASE</th><th>OPTIMISTA</th></tr>
+            <tr>
+                <td id="kpi_c_p">€0</td>
+                <td id="kpi_c_b">€0</td>
+                <td id="kpi_c_o">€0</td>
+            </tr>
+        </table>
+        <p class="desc">Ingresos adicionales por red y gestión.</p>
+    </div>
+</div>
+<div class="comparison-container">
+    <h3 class="comparison-title">Comparativa de Indicadores Clave</h3>
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th>Métrica Operativa</th>
+                <th class="col-p">Pesimista</th>
+                <th class="col-b">Base</th>
+                <th class="col-o">Optimista</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Energía Total (kWh/mes)</td>
+                <td id="comp_kwh_p">0</td>
+                <td id="comp_kwh_b">0</td>
+                <td id="comp_kwh_o">0</td>
+            </tr>
+            <tr>
+                <td>Margen de Energía (%)</td>
+                <td id="comp_margin_p">0%</td>
+                <td id="comp_margin_b">0%</td>
+                <td id="comp_margin_o">0%</td>
+            </tr>
+            <tr>
+                <td>Tiempo de Retorno (Payback)</td>
+                <td id="comp_pay_p">-</td>
+                <td id="comp_pay_b">-</td>
+                <td id="comp_pay_o">-</td>
+            </tr>
+            <tr>
+                <td>TIR Operativa (%)</td>
+                <td id="comp_tir_p">0%</td>
+                <td id="comp_tir_b">0%</td>
+                <td id="comp_tir_o">0%</td>
+            </tr>
+            <tr>
+                <td>Plusvalía del Activo (x veces)</td>
+                <td id="comp_plus_p">0x</td>
+                <td id="comp_plus_b">0x</td>
+                <td id="comp_plus_o">0x</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="interpretacion-box">
+    <h3>¿Qué significa esto?</h3>
+    <div id="interpretacion"></div>
+</div>
+.
+<!-- Contenedor del gráfico -->
+<div class="grafico-box">
+    <canvas id="graficaGanancias"></canvas>
+</div>
+
+<div class="chart-highlight">
+    <h3><center>Proyección de Ganancias a 36 meses</center></h3>
+    <center>Escenario Base</center>
+    <canvas id="graficoFlujo"></canvas>
+</div>
+
+<div>
+    <center><button class="reset-btn" onclick="resetEditable()">Resetear valores</button> </center>
+</div>
+
+    <!-- ================= RESUMEN ESTRATÉGICO DEL COMPRADOR ================= -->
+
+<hr class="table-divider">
+<table class="main-table">
+        <thead>
+            <tr class="big-divider">
+                <td colspan="5">1. VENTA DE ELECTRICIDAD</td>
+            </tr>
+            <tr>
+                <th>CONCEPTO</th>
+                <th>ESCENARIO PESIMISTA</th>
+                <th>ESCENARIO BASE</th>
+                <th>ESCENARIO OPTIMISTA</th>
+                <th>UNIDAD / LÓGICA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sec"><td colspan="5">1. PREMISAS DE VENTA</td></tr>
+            <tr>
+                <td class="lbl">Número de tomas</td>
+                <td><input id="v1_p" class="read" value="2"></td>
+                <td><input id="v1_b" class="read" value="4"></td>
+                <td><input id="v1_o" class="read" value="6"></td>
+                <td>Unidades</td>
+            </tr>
+            <tr>
+                <td class="lbl">Velocidad de carga (Potencia)</td>
+                <td><input id="v11_p" class="read" value="7.4"></td>
+                <td><input id="v11_b" class="read" value="22"></td>
+                <td><input id="v11_o" class="read" value="28"></td>
+                <td>kW</td>
+            </tr>
+            <tr>
+                <td class="lbl">Porcentaje de utilización diaria</td>
+                <td><input id="v2_p" class="read" value="3"></td>
+                <td><input id="v2_b" class="read" value="5"></td>
+                <td><input id="v2_o" class="read" value="7"></td>
+                <td>% (0-100)</td>
+            </tr>
+            <tr>
+                <td class="lbl">Venta mensual calculada x cargador</td>
+                <td><input id="v3_p" class="read" readonly></td>
+                <td><input id="v3_b" class="read" readonly></td>
+                <td><input id="v3_o" class="read" readonly></td>
+                <td>kWh/mes</td>
+            </tr>
+            <tr><td class="lbl">Precio de venta (PVP)</td><td><input id="v4_p" class="read" value="0.40"></td><td><input id="v4_b" class="read" value="0.45"></td><td><input id="v4_o" class="read" value="0.50"></td><td>EUR/kWh</td></tr>
+            <tr><td class="lbl">Costo de compra electricidad</td><td><input id="v5_p" class="read" value="0.25"></td><td><input id="v5_b" class="read" value="0.20"></td><td><input id="v5_o" class="read" value="0.15"></td><td>EUR/kWh</td></tr>
+            <tr><td class="lbl">Margen simple por electricidad</td><td><input id="v6_p" class="read"></td><td><input id="v6_b" class="read"></td><td><input id="v6_o" class="read"></td><td>%</td></tr>
+            <tr><td class="lbl">Ajuste precios por inflación</td>
+                <td><input id="v7_p" class="read" value="6%"></td>
+                <td><input id="v7_b" class="read" value="4%"></td>
+                <td><input id="v7_o" class="read" value="3%"></td><td>% anual</td></tr>
+            <tr><td class="lbl">Crecimiento vehículos enchufables</td>
+                <td><input id="v8_p" class="read" value="4%"></td>
+                <td><input id="v8_b" class="read" value="6%"></td>
+                <td><input id="v8_o" class="read" value="8%"></td><td>vs. Año anterior</td></tr>
+            <tr><td class="lbl">Periodo de amortización</td>
+                <td><input id="v9_p" class="read" value="60"></td>
+                <td><input id="v9_b" class="read" value="60"></td>
+                <td><input id="v9_o" class="read" value="60"></td><td>Meses</td></tr>
+            <tr class="total"><td class="lbl">SUBTOTAL INGRESOS ELECTRICIDAD</td><td><input id="v10_p" class="read"></td><td><input id="v10_b" class="read"></td><td><input id="v10_o" class="read"></td><td>Venta Energía</td></tr>
+
+            <tr class="sec"><td colspan="5">2. GASTOS FIJOS (CAPEX)</td></tr>
+            <tr><td class="lbl">Instalación (Obra/Cableado)</td><td><input type="number" id="c1_p" class="edit" value="1000"></td><td><input type="number" id="c1_b" class="edit" value="1500"></td><td><input type="number" id="c1_o" class="edit" value="2000"></td><td>Inversión</td></tr>
+            <tr><td class="lbl">Permisos y Licencias</td>
+                <td><input id="c2_p" class="read" value="10"></td>
+                <td><input id="c2_b" class="read" value="10"></td>
+                <td><input id="c2_o" class="read" value="10"></td><td>Inversión</td></tr>
+            <tr><td class="lbl">Pintura y Señalización</td>
+                <td><input id="c3_p" class="read" value="5"></td>
+                <td><input id="c3_b" class="read" value="5"></td>
+                <td><input id="c3_o" class="read" value="5"></td><td>Inversión</td></tr>
+            <tr><td class="lbl">Equipos de Recarga (Adquisición)</td><td><input type="number" id="c4_p" class="edit" value="1500"></td><td><input type="number" id="c4_b" class="edit" value="3000"></td><td><input type="number" id="c4_o" class="edit" value="6000"></td><td>€750 x ud</td></tr>
+            <tr><td class="lbl">Publicidad Inicial</td>
+                <td><input id="c5_p" class="read" value="5"></td>
+                <td><input id="c5_b" class="read" value="5"></td>
+                <td><input id="c5_o" class="read" value="5"></td><td>Inversión</td></tr>
+            <tr><td class="lbl">Formación de Personal / Otros</td>
+                <td><input id="c6_p" class="read" value="2"></td>
+                <td><input id="c6_b" class="read" value="2"></td>
+                <td><input id="c6_o" class="read" value="2"></td><td>Inversión</td></tr>
+            <tr><td class="lbl">Impuestos y gravamenes</td><td><input type="number" id="c7_p" class="edit" value="0"></td><td><input type="number" id="c7_b" class="edit" value="0"></td><td><input type="number" id="c7_o" class="edit" value="0"></td><td>Fiscal</td></tr>
+            <tr><td class="lbl">Depreciación fiscal (20%)</td><td><input id="c8_p" class="read"></td><td><input id="c8_b" class="read"></td><td><input id="c8_o" class="read"></td><td>Anual</td></tr>
+            <tr><td class="lbl">Subsidios aplicables</td><td><input type="number" id="c9_p" class="edit" value="0"></td><td><input type="number" id="c9_b" class="edit" value="0"></td><td><input type="number" id="c9_o" class="edit" value="0"></td><td>% subvención</td></tr>
+            <tr class="total"><td class="lbl">TOTAL INVERSIÓN INICIAL</td><td><input id="c10_p" class="read"></td><td><input id="c10_b" class="read"></td><td><input id="c10_o" class="read"></td><td>CAPEX</td></tr>
+            <tr><td class="lbl">Amortización Mensual</td><td><input id="c11_p" class="read"></td><td><input id="c11_b" class="read"></td><td><input id="c11_o" class="read"></td><td>Gasto mes</td></tr>
+
+            <tr class="sec"><td colspan="5">3. GASTOS OPERATIVOS (OPEX)</td></tr>
+            <tr><td class="lbl">Royalties Xcelentric (Fijo)</td>
+                <td><input id="o1_p" class="read" value="29"></td>
+                <td><input id="o1_b" class="read" value="58"></td>
+                <td><input id="o1_o" class="read" value="87"></td><td>€14.5/mes x ud</td></tr>
+            <tr><td class="lbl">Mantenimiento Preventivo</td>
+                <td><input id="o2_p" class="read" value="5"></td>
+                <td><input id="o2_b" class="read" value="10"></td>
+                <td><input id="o2_o" class="read" value="15"></td><td>€2.5/mes x ud</td></tr>
+            <tr><td class="lbl">Mantenimiento Correctivo</td>
+                <td><input id="o3_p" class="read" value="100"></td>
+                <td><input id="o3_b" class="read" value="200"></td>
+                <td><input id="o3_o" class="read" value="800"></td><td>Mensual</td></tr>
+            <tr><td class="lbl">Seguro Civil y Vandalismo</td>
+                <td><input type="number" id="o4_p" class="edit" value="0"></td>
+                <td><input type="number" id="o4_b" class="edit" value="0"></td>
+                <td><input type="number" id="o4_o" class="edit" value="0"></td><td>Provisión</td></tr>
+            <tr><td class="lbl">Publicidad Recurrente</td>
+                <td><input id="o5_p" class="read" value="20"></td>
+                <td><input id="o5_b" class="read" value="30"></td>
+                <td><input id="o5_o" class="read" value="40"></td><td>Mensual</td></tr>
+            <tr><td class="lbl">Transacciones Bancarias</td>
+                <td><input type="number" id="o6_p" class="edit" value="0"></td>
+                <td><input type="number" id="o6_b" class="edit" value="0"></td>
+                <td><input type="number" id="o6_o" class="edit" value="0"></td><td>Comisiones</td></tr>
+            <tr><td class="lbl">Tarjetas RFID</td>
+                <td><input id="o7_p" class="read" value="7.5"></td>
+                <td><input id="o7_b" class="read" value="10"></td>
+                <td><input id="o7_o" class="read" value="15"></td><td>Mensual</td></tr>
+            <tr><td class="lbl">Conectividad (SIM card)</td>
+                <td><input id="o8_p" class="read" value="8"></td>
+                <td><input id="o8_b" class="read" value="16"></td>
+                <td><input id="o8_o" class="read" value="24"></td><td>€4/mes x ud</td></tr>
+            <tr><td class="lbl">ISR y retenciones fiscales</td>
+                <td><input type="number" id="o9_p" class="edit" value="0"></td>
+                <td><input type="number" id="o9_b" class="edit" value="0"></td>
+                <td><input type="number" id="o9_o" class="edit" value="0"></td><td>Mensual</td></tr>
+            <tr class="total"><td class="lbl">TOTAL OPEX FIJO MENSUAL</td><td><input id="o10_p" class="read"></td><td><input id="o10_b" class="read"></td><td><input id="o10_o" class="read"></td><td>Sin energía</td></tr>
+
+            <tr class="sec"><td colspan="5">4. INGRESOS EXTRA (EXPLOTACIÓN)</td></tr>
+            <tr><td class="lbl">Publicidad in-situ</td>
+                <td><input id="e1_p" class="read" value="25"></td>
+                <td><input id="e1_b" class="read" value="60"></td>
+                <td><input id="e1_o" class="read" value="125"></td><td>Por ubicación</td></tr>
+            <tr><td class="lbl">Membresías VIP (Suscripción)</td>
+                <td><input id="e2_p" class="read" value="15"></td>
+                <td><input id="e2_b" class="read" value="40"></td>
+                <td><input id="e2_o" class="read" value="75"></td><td>Fijo mensual</td></tr>
+            <tr><td class="lbl">Tarifas de Ocupación (Idle fees)</td>
+                <td><input id="e3_p" class="read" value="7.5"></td>
+                <td><input id="e3_b" class="read" value="17.5"></td>
+                <td><input id="e3_o" class="read" value="35"></td><td>Por exceso</td></tr>
+            <tr><td class="lbl">Generación de Leads / Cupones</td>
+                <td><input id="e4_p" class="read" value="5"></td>
+                <td><input id="e4_b" class="read" value="12.5"></td>
+                <td><input id="e4_o" class="read" value="30"></td><td>Alianzas</td></tr>
+            <tr><td class="lbl">Créditos de Carbono (Mensual)</td>
+                <td><input id="e5_p" class="read" value="2.5"></td>
+                <td><input id="e5_b" class="read" value="7.5"></td>
+                <td><input id="e5_o" class="read" value="15"></td><td>Bonos CO2</td></tr>
+            <tr class="total"><td class="lbl">SUBTOTAL INGRESOS EXTRA</td><td><input id="e6_p" class="read"></td><td><input id="e6_b" class="read"></td><td><input id="e6_o" class="read"></td><td>Extra Total</td></tr>
+
+            <tr class="sec"><td colspan="5">5. RENTABILIDAD MENSUAL</td></tr>
+            <tr><td class="lbl">INGRESOS TOTALES</td><td><input id="r1_p" class="read"></td><td><input id="r1_b" class="read"></td><td><input id="r1_o" class="read"></td><td>Carga + Extra</td></tr>
+            <tr><td class="lbl">Costo de Energía (Suministro)</td><td><input id="r2_p" class="read"></td><td><input id="r2_b" class="read"></td><td><input id="r2_o" class="read"></td><td>kWh * Costo</td></tr>
+            <tr><td class="lbl">Royalty Variable Energía (15%)</td><td><input id="r3_p" class="read"></td><td><input id="r3_b" class="read"></td><td><input id="r3_o" class="read"></td><td>s/Ingreso Energía</td></tr>
+            <tr class="net-row"><td class="lbl">UTILIDAD NETA MENSUAL</td><td><input id="r4_p" class="read"></td><td><input id="r4_b" class="read"></td><td><input id="r4_o" class="read"></td><td>GANANCIA REAL</td></tr>
+            <!-- --- -->
+
+        
+        </tbody>
+    </table>
+
+<hr class="table-divider">
+
+<table class="main-table">
+        <thead>
+            <tr class="big-divider">
+                <td colspan="5">2. RESULTADOS ESTRATÉGICOS Y CRECIMIENTO</td>
+            </tr>
+            <tr>
+                <th>CONCEPTO</th>
+                <th>ESCENARIO PESIMISTA</th>
+                <th>ESCENARIO BASE</th>
+                <th>ESCENARIO OPTIMISTA</th>
+                <th>UNIDAD / LÓGICA</th>
+            </tr>
+        </thead>
+        <tbody>
+                        <!-- 6. ESCALABILIDAD A 10 CARGADORES -->
+            <tr class="sec"><td colspan="5">6. ESCALABILIDAD A 10 CARGADORES</td></tr>
+            <tr>
+                <td class="lbl">Inversión Extra (para llegar a 10 equipos)</td>
+                <td><input type="number" id="v6_1_p" class="edit" value="300"></td>
+                <td><input type="number" id="v6_1_b" class="edit" value="150"></td>
+                <td><input type="number" id="v6_1_o" class="edit" value="75"></td>
+                <td>CAPEX expansión</td>
+            </tr>
+            <tr>
+                <td class="lbl">Utilidad Neta Mes (10 Unidades)</td>
+                <td><input id="v6_2_p" class="read"></td>
+                <td><input id="v6_2_b" class="read"></td>
+                <td><input id="v6_2_o" class="read"></td>
+                <td>Escalamiento total</td>
+            </tr>
+            <tr>
+                <td class="lbl">Año Óptimo Escalabilidad</td>
+                <td><input id="v6_3_p" class="read"></td>
+                <td><input id="v6_3_b" class="read"></td>
+                <td><input id="v6_3_o" class="read"></td>
+                <td></td>
+            </tr>
+
+            <!-- 7. ACUMULADOS Y REINVERSIÓN -->
+            <tr class="sec"><td colspan="5">7. ACUMULADOS Y REINVERSIÓN (5 AÑOS)</td></tr>
+            <tr>
+                <td class="lbl">Acumulado Simple (5 años)</td>
+                <td><input id="v7_1_p" class="read"></td>
+                <td><input id="v7_1_b" class="read"></td>
+                <td><input id="v7_1_o" class="read"></td>
+                <td>Flujo caja neto</td>
+            </tr>
+            <tr>
+                <td class="lbl">Reinversión (7% Anual Compuesto)</td>
+                <td><input id="v7_2_p" class="read"></td>
+                <td><input id="v7_2_b" class="read"></td>
+                <td><input id="v7_2_o" class="read"></td>
+                <td>%</td>
+            </tr>
+
+            <!-- 8. EXIT -->
+            <tr class="sec"><td colspan="5">8. VALUACIÓN DE VENTA (EXIT)</td></tr>
+            <tr>
+                <td class="lbl">VALOR CONTRATO (7 AÑOS)</td>
+                <td><input id="v8_1_p" class="read"></td>
+                <td><input id="v8_1_b" class="read"></td>
+                <td><input id="v8_1_o" class="read"></td>
+                <td>Mínimo a negociar</td>
+            </tr>
+            <tr>
+                <td class="lbl">Múltiplo de Salida (EBITDA)</td>
+                <td><input id="v8_2_p" class="read" value="3"></td>
+                <td><input id="v8_2_b" class="read" value="5"></td>
+                <td><input id="v8_2_o" class="read" value="7"></td>
+                <td>Múltiplo mercado</td>
+            </tr>
+            <tr>
+                <td class="lbl">PRECIO VENTA NEGOCIO (EXIT)</td>
+                <td><input id="v8_3_p" class="read"></td>
+                <td><input id="v8_3_b" class="read"></td>
+                <td><input id="v8_3_o" class="read"></td>
+                <td>Valuación base</td>
+            </tr>
+            <tr>
+                <td class="lbl">Plus por Escalabilidad</td>
+                <td><input id="v8_4_p" class="read"></td>
+                <td><input id="v8_4_b" class="read"></td>
+                <td><input id="v8_4_o" class="read"></td>
+                <td>Valor estratégico</td>
+            </tr>
+            <tr class="total">
+                <td class="lbl">VALUACIÓN FINAL EXIT</td>
+                <td><input id="v8_5_p" class="read"></td>
+                <td><input id="v8_5_b" class="read"></td>
+                <td><input id="v8_5_o" class="read"></td>
+                <td>PRECIO DE SALIDA</td>
+            </tr>
+            <!-- 9. VALOR POR PLAZA (100k inicial) -->
+            <tr class="sec"><td colspan="5">9. VALOR POR PLAZA (€5k inicial)</td></tr>
+            <tr>
+            <td class="lbl">TIR Proyecto (5 años)</td>
+            <td><input id="v9_1_p" class="read"></td>
+            <td><input id="v9_1_b" class="read"></td>
+            <td><input id="v9_1_o" class="read"></td>
+            <td>%</td>
+            </tr>
+            <tr>
+            <td class="lbl">Tiempo de retorno</td>
+            <td><input id="v9_2_p" class="read"></td>
+            <td><input id="v9_2_b" class="read"></td>
+            <td><input id="v9_2_o" class="read"></td>
+            <td>Meses</td>
+            </tr>
+            <tr>
+            <td class="lbl">Valor Inicial</td>
+            <td><input type="number" id="v9_3_p" class="edit" value="5000"></td>
+            <td><input type="number" id="v9_3_b" class="edit" value="5000"></td>
+            <td><input type="number" id="v9_3_o" class="edit" value="5000"></td>
+            <td>Parking vacío</td>
+            </tr>
+            <tr>
+            <td class="lbl">Valor Final x Plaza Equipada</td>
+            <td><input id="v9_4_p" class="read"></td>
+            <td><input id="v9_4_b" class="read"></td>
+            <td><input id="v9_4_o" class="read"></td>
+            <td>Venta por unidad</td>
+            </tr>
+            <tr class="total">
+            <td class="lbl">PLUSVALÍA GENERADA (x veces)</td>
+            <td><input id="v9_5_p" class="read"></td>
+            <td><input id="v9_5_b" class="read"></td>
+            <td><input id="v9_5_o" class="read"></td>
+            <td></td>
+            </tr>
+        
+        </tbody>
+    </table>
+<hr class="table-divider">
+<table class="main-table">
+        <thead>
+            <tr class="big-divider">
+                <td colspan="5">3. COMISIONES</td>
+            </tr>    
+            <tr>
+                <th>CONCEPTO</th>
+                <th>ESCENARIO PESIMISTA</th>
+                <th>ESCENARIO BASE</th>
+                <th>ESCENARIO OPTIMISTA</th>
+                <th>UNIDAD / LÓGICA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 10. COMISIONES DE VENTAS GENERADAS -->
+            <tr class="sec"><td colspan="5">10. COMISIONES DE VENTAS GENERADAS</td></tr>
+            <tr>
+            <td class="lbl">Comisión Fija (Cargadores Propios)</td>
+            <td><input id="v10_1_p" class="read"></td>
+            <td><input id="v10_1_b" class="read"></td>
+            <td><input id="v10_1_o" class="read"></td>
+            <td>€25 + Número de Tomas</td>
+            </tr>
+            <tr>
+            <td class="lbl">Com. Variable kWh (2% s/Venta)</td>
+            <td><input id="v10_2_p" class="read"></td>
+            <td><input id="v10_2_b" class="read"></td>
+            <td><input id="v10_2_o" class="read"></td>
+            <td>2% de Ingresos</td>
+            </tr>
+            <tr>
+            <td class="lbl">Estimado de Cargadores Referidos</td>
+            <td><input id="v10_3_p" class="read"></td>
+            <td><input id="v10_3_b" class="read"></td>
+            <td><input id="v10_3_o" class="read"></td>
+            <td>Unidades externas</td>
+            </tr>
+            <tr>
+            <td class="lbl">Com. Referidos</td>
+            <td><input id="v10_4_p" class="read"></td>
+            <td><input id="v10_4_b" class="read"></td>
+            <td><input id="v10_4_o" class="read"></td>
+            <td>€10 + Número de Tomas</td>
+            </tr>
+            <tr class="total">
+            <td class="lbl">TOTAL COMISIONES MES</td>
+            <td><input id="v10_5_p" class="read"></td>
+            <td><input id="v10_5_b" class="read"></td>
+            <td><input id="v10_5_o" class="read"></td>
+            <td>La fija se amortiza</td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="graf.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
+

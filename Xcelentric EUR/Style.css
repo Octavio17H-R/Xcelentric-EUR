@@ -1,0 +1,737 @@
+@font-face {
+    font-family: 'XcelentricFont';
+    /* Quitamos la diagonal inicial para que busque la carpeta fonts 
+       en la misma ubicación donde está el archivo CSS */
+    src: url('fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+:root {
+    --yellow: #f4c430;          /* Amarillo Xcelentric */
+    --yellow-soft: #fff4cc;
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+}
+
+/* Fondo */
+body {
+    font-family: 'XcelentricFont', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background: linear-gradient(180deg,#f3f4f6,#ffffff);
+    padding: 40px 20px;
+    color: var(--gray-800);
+}
+
+/* Card principal */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+}
+
+/* Título */
+.container h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: var(--gray-800);
+}
+
+/* Tabla */
+/* Tabla principal grande */
+.main-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Headers */
+th {
+    background: var(black);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+}
+
+/* Celdas */
+td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(black);
+}
+
+/* Secciones */
+.sec td {
+    background: linear-gradient(90deg,var(--yellow),var(--yellow-soft));
+    color: var(--gray-800);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+/* Labels */
+.lbl {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: right;
+    font-size: 11px;
+    color: var(--gray-800);
+}
+
+/* Inputs editables */
+input.edit {
+    background: var(--yellow-soft);
+    border-radius: 6px;
+    padding: 6px;
+    border: 1px solid var(--yellow);
+    font-weight: 600;
+}
+
+/* Inputs calculados */
+input.read {
+    pointer-events: none;
+    font-weight: 700;
+}
+
+/* Totales */
+.total td {
+    background: var(--gray-100);
+    font-weight: 700;
+}
+
+/* Utilidad neta */
+.net-row td {
+    background: linear-gradient(90deg,var(--yellow),#ffd966);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--gray-800);
+}
+
+.net-row input {
+    color: var(--gray-800) !important;
+}
+
+
+/* Separador estratégico */
+.big-divider td {
+    background: linear-gradient(90deg,#111827,#374151);
+    color: #ffffff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 14px;
+    border-top: 4px solid var(--yellow);
+    border-bottom: 4px solid var(--yellow);
+}
+/* ================= RESUMEN KPI PRINCIPAL ================= */
+
+/* Contenedor general */
+.summary-box {
+    max-width: 100%;      /* no se salga del body */
+    width: 100%;
+    padding: 20px;        /* reducimos padding para móviles */
+    box-sizing: border-box; /* importante para que padding no sume ancho */
+    overflow: hidden;     /* opcional, evita scroll horizontal */
+}
+/* Responsivo */
+@media (max-width: 1000px) {
+    .triple-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .triple-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ajustes de padding para móviles */
+@media (max-width: 650px) {
+    .summary-box {
+        padding: 15px 10px;
+    }
+}
+
+.summary-box h3 {
+    margin: 0 0 16px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--gray-800);
+}
+
+.summary-table {
+    width: auto;
+    margin: auto;
+}
+
+.summary-table th {
+    background: var(--gray-800);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    font-size: 11px;
+    border-radius: 8px;
+}
+
+.summary-table td {
+    background: linear-gradient(90deg,#f4c430,#ffb703);
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: #111827;
+    padding: 16px;
+    border-radius: 12px;
+    line-height: 1.1;
+}
+.header-title {
+    position: relative;
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 40px 20px 20px 20px; /* espacio superior para logos */
+    background: #ffffff;           /* blanco sólido */
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* sombra suave */
+}
+
+
+
+/* Logo izquierdo más grande */
+.title-logo-left {
+    position: absolute;
+    top: 10px;  
+    left: 20px;
+    width: 120px; /* más grande */
+}
+
+.title-logo-right {
+    position: absolute;
+    top: 10px;  
+    right: 20px;
+    width: 60px;  /* más pequeño */
+}
+
+.title-logo-left img,
+.title-logo-right img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Título centrado */
+.title-text {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gray-800);
+    line-height: 1.1;
+}
+/* ================= BOTÓN RESET ================= */
+
+.reset-btn {
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    background: #1f2937;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.reset-btn:hover {
+    background: #111827;
+    transform: translateY(-1px);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
+/* ================= COLUMNA UNIDAD LÓGICA (DIFERENCIAS) ================= */
+
+tbody td:nth-child(5) {
+    background: #fffdf0;   /* amarillo tenue */
+    font-weight: 600;
+}
+/* ===== RESUMEN TRIPLE ===== */
+.triple-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+/* Pantallas medianas */
+@media (max-width: 1000px) {
+    .triple-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Pantallas pequeñas / móviles */
+@media (max-width: 650px) {
+    .triple-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+.summary-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+.summary-card h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.summary-card .desc {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.summary-card table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+
+.summary-card th {
+    font-size: 10px;
+    background: #1f2937;
+    color: #fff;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.summary-card td {
+    background: linear-gradient(90deg,#f4c430,#ffd966);
+    font-size: 16px;
+    font-weight: 900;
+    padding: 12px 6px;
+    border-radius: 10px;
+}
+
+.summary-card.highlight {
+    background: linear-gradient(135deg,#fff6d1,#ffffff);
+    border: 2px solid #f4c430;
+}
+
+.summary-card small {
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+    color: #666;
+}
+.table-divider {
+    border: none;
+    height: 4px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #9ca3af,
+        transparent
+    );
+    margin: 50px 0;
+}
+.chart-box {
+    max-width: 950px;
+    margin: 0 auto 50px;
+    padding: 22px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    height: 380px;
+}
+
+.chart-box h3 {
+    text-align: center;
+    margin-bottom: 18px;
+    font-weight: 700;
+}
+/* Contenedor general */
+.scenario-section {
+    text-align: center; /* centra todo */
+    margin-bottom: 30px;
+}
+
+/* Título */
+.scenario-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 12px;
+}
+
+/* Controles */
+.scenario-controls {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    gap: 6px;
+    margin-top: 5px;
+}
+
+/* Cada bloque de control */
+.sc-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Empuja el texto a los bordes */
+    gap: 8px;                      /* Espacio entre etiqueta, slider y valor */
+    width: 100%;                    /* Ocupa todo el ancho de la tarjeta */
+    box-sizing: border-box;         /* Importante: incluye el padding en el ancho */
+    padding: 4px 10px;
+    background: #ffffff;
+    border: 1px solid #f3e7b0;
+    border-radius: 10px;
+}
+
+/* Label dentro de control */
+.sc-item .sc-label {
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 60px; /* ancho mínimo para alinear */
+}
+
+/* Inputs */
+.sc-item input {
+    width: 40px;         /* más compacto */
+    padding: 4px 6px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid var(--yellow-soft);
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--gray-800);
+}
+
+/* Botones */
+.sc-item button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border-radius: 6px;
+    font-weight: 700;
+    background: var(--yellow);
+    color: var(--gray-800);
+    border: 1px solid var(--yellow);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sc-item button:hover {
+    background: #ffd966;
+    transform: translateY(-1px);
+}
+/* Recuadro que encierra los controles */
+.scenario-section-box {
+    padding: 10px 15px;
+    border: 1px solid #f1e3a0;
+    border-radius: 14px;
+    background: linear-gradient(180deg,#fffdf5,#ffffff);
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    width: fit-content;
+    margin: 0 auto 35px auto;
+}
+/* Título dentro del recuadro */
+.scenario-section-box .scenario-title {
+    margin-bottom: 2px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+.grafico-box {
+    background-color: rgba(255, 242, 190, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(138, 117, 1, 0.1);
+    margin-bottom: 30px;
+    height: 400px; /* altura fija */
+}
+
+.grafico-box canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width:100%;
+}
+.summary-header .currency-label {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    color: #252525;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    font-family: 'XcelentricFont', Arial, sans-serif;
+
+}
+
+/* ===== SLIDER XCELENTRIC PRO ===== */
+
+.sc-item input[type="range"]{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 130px;
+    height: 4px; /* más delgado */
+    background: linear-gradient(90deg,var(--yellow),#ffe48f);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    flex: 1;              /* El slider toma todo el espacio disponible al centro */
+    min-width: 50px;      /* Evita que desaparezca en pantallas muy pequeñas */
+    max-width: 150px;
+}
+
+/* barra */
+.sc-item input[type="range"]::-webkit-slider-runnable-track{
+    height:4px;
+    border-radius:10px;
+}
+
+/* thumb */
+.sc-item input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:14px;     /* más pequeño */
+    height:14px;
+    border-radius:50%;
+    background: var(--gray-800);
+    border:2px solid var(--yellow);
+    margin-top:-5px;
+    transition:all .15s ease;
+}
+
+/* hover */
+.sc-item input[type="range"]::-webkit-slider-thumb:hover{
+    transform: scale(1.2);
+}
+
+/* firefox */
+.sc-item input[type="range"]::-moz-range-thumb{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background: var(--gray-800);
+    border:2px solid var(--yellow);
+}
+
+/* Número al lado del slider */
+.slider-value{
+    font-weight:800;
+    font-size:12px;
+    min-width:40px;
+    text-align:center;
+    color: var(--gray-800);
+}
+
+.interpretacion-box{
+
+background:#fff8db;
+border-left:6px solid #f4c430;
+padding:20px;
+margin-top:25px;
+border-radius:8px;
+font-size:16px;
+line-height:1.6;
+
+}
+.chart-highlight {
+
+    background: linear-gradient(135deg,#fcfaf2,#ffffff);
+    border: 2px solid #ffdb70;
+
+    max-width: 950px;
+    margin: 0 auto 50px;
+    padding: 22px;
+
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+
+    height: 380px;
+
+    position: relative; /* CLAVE para Chart.js */
+    overflow: hidden;
+}
+
+/* control del canvas */
+.chart-highlight canvas{
+    width:100% !important;
+    height:100% !important;
+}
+.grafico-box{
+    display:none;
+}
+/* Esto fuerza las 3 columnas */
+.simulation-controls {
+    display: flex;
+    flex-direction: row;      /* En fila */
+    flex-wrap: wrap;         /* Si no caben, bajan (útil en móviles) */
+    gap: 20px;               /* Espacio entre tarjetas */
+    justify-content: center; /* Centradas */
+    align-items: stretch;    /* Todas del mismo alto */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+}
+
+/* Ajuste de las tarjetas */
+.scenario-section-box {
+    flex: 1;                 /* Se distribuyen el ancho equitativamente */
+    min-width: 320px;        /* Evita que se aplasten demasiado */
+    margin: 0 !important;    /* Quitamos el margin auto que tenías */
+}
+
+/* Alineación interna (Labels arriba del slider si el espacio es poco) */
+.scenario-controls {
+    display: flex;
+    flex-direction: column;  /* Sliders uno debajo del otro dentro de la tarjeta */
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Mejora para el item individual */
+.sc-item {
+    justify-content: space-between; /* Label a la izquierda, número a la derecha */
+    width: 100%;
+}
+.card-details {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: #000000;
+}
+
+.detail-row strong {
+    color: #000000;
+    font-weight: 700;
+}
+
+.summary-card.highlight .detail-row {
+    color: #000000; /* Mejor contraste en la tarjeta resaltada */
+}
+.comparison-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.comparison-title {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 4rem;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.comparison-table th {
+    background: #f8f9fa;
+    color: #000000;
+    font-weight: 600;
+}
+
+/* Colores por columna para guiar el ojo */
+.col-p { border-bottom: 3px solid #e74c3c !important; } /* Rojo */
+.col-b { border-bottom: 3px solid #3498db !important; } /* Azul */
+.col-o { border-bottom: 3px solid #27ae60 !important; } /* Verde */
+
+.comparison-table tr:hover {
+    background-color: #fcfcfc;
+}
+
+.comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: #555;
+    width: 30%;
+}
+.title-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Título principal: Grande y Negritas */
+.title-main {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--gray-800); /* Gris muy oscuro casi negro */
+    margin-bottom: 8px;
+    line-height: 1.1;
+}
+
+/* Subtítulo: Tamaño mediano y peso normal */
+.title-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: black; /* Gris medio profesional */
+    margin-bottom: 6px;
+}
+
+/* Disclaimer: El más pequeño y gris claro */
+.title-disclaimer {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--gray-600); /* Gris claro */
+}
+/* Unifica la primera columna de la tabla comparativa */
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+    text-align: left !important;
+    padding-left: 24px;
+    color: var(--gray-600);
+}
+
+/* Unifica las columnas de escenarios (Pesimista, Base, Optimista) */
+.comparison-table th:not(:first-child),
+.comparison-table td:not(:first-child) {
+    text-align: center !important;
+    width: 22%; /* Asegura que las columnas midan lo mismo */
+}
+
+/* Título de la comparativa (Corrección de tamaño gigante) */
+.comparison-title {
+    font-size: 24px !important; /* Estaba en 4rem, lo bajamos a algo legible */
+    font-weight: 800;
+    text-transform: none; /* Quitamos las mayúsculas forzadas */
+    color: var(--gray-800);
+}
