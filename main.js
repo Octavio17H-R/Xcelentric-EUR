@@ -1,7 +1,7 @@
 
 const fmt = (n) => '€' + Number(n || 0).toLocaleString('es-ES', {
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 0
+minimumFractionDigits: 0,
+maximumFractionDigits: 0
 });
     function calculate() {
         ['p', 'b', 'o'].forEach(s => {
@@ -269,7 +269,7 @@ function resetEditable() {
             document.getElementById(`val_v2_${s}`).textContent = defUtil + "%";
             document.getElementById(`v2_${s}`).value = defUtil;
         }
-        const defCosto = (s === 'p') ? 4.90 : (s === 'b') ? 3.90 : 2.90;
+        const defCosto = (s === 'p') ? 0.25 : (s === 'b') ? 0.20 : 0.15;
         if(document.getElementById(`ctrl_v5_${s}`)) {
             document.getElementById(`ctrl_v5_${s}`).value = defCosto;
             document.getElementById(`val_v5_${s}`).textContent =defCosto.toFixed(2);

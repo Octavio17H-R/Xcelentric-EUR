@@ -95,7 +95,7 @@
     </div>
     </div>
     <div class="scenario-section-box">
-        <h3 class="scenario-title">Valor Inicial de Cajón de Estacionamiento</h3>
+        <h3 class="scenario-title">Valor Inicial de Plaza de Parking</h3>
         <div class="scenario-controls">
             <div class="sc-item">
                 <span class="sc-label">Pesimista</span>
@@ -121,18 +121,18 @@
         <div class="scenario-controls">
             <div class="sc-item">
                 <span class="sc-label">Pesimista</span>
-                <input type="range" min="0" max="12" step="0.1" value="0.40" oninput="syncInput('v4_p', this.value); document.getElementById('val_price_p').textContent = this.value;">
+                <input type="range" min="0" max="1" step="0.05" value="0.40" oninput="syncInput('v4_p', this.value); document.getElementById('val_price_p').textContent = this.value;">
                 <span class="slider-value" id="val_price_p">0.40</span>
             </div>
             <div class="sc-item">
                 <span class="sc-label">Base</span>
-                <input type="range" min="0" max="12" step="0.1" value="0.45" oninput="syncInput('v4_b', this.value); document.getElementById('val_price_b').textContent = this.value;">
+                <input type="range" min="0" max="1" step="0.05" value="0.45" oninput="syncInput('v4_b', this.value); document.getElementById('val_price_b').textContent = this.value;">
                 <span class="slider-value" id="val_price_b">0.45</span>
             </div>
             <div class="sc-item">
                 <span class="sc-label">Optimista</span>
-                <input type="range" min="0" max="12" step="0.1" value="0.50" oninput="syncInput('v4_o', this.value); document.getElementById('val_price_o').textContent = this.value;">
-                <span class="slider-value" id="val_price_o">0.50</span>
+                <input type="range" min="0" max="1" step="0.05" value="0.60" oninput="syncInput('v4_o', this.value); document.getElementById('val_price_o').textContent = this.value;">
+                <span class="slider-value" id="val_price_o">0.60</span>
             </div>
         </div>
     </div>
@@ -141,17 +141,17 @@
     <div class="scenario-controls">
         <div class="sc-item">
             <span class="sc-label">Pesimista</span>
-            <input type="range" id="ctrl_v5_p" min="0" max="20" step="0.1" value="0.25" oninput="syncCosto('p', this.value)">
+            <input type="range" id="ctrl_v5_p" min="0" max="1" step="0.05" value="0.25" oninput="syncCosto('p', this.value)">
             <span id="val_v5_p" class="slider-value">0.25</span>
         </div>
         <div class="sc-item">
             <span class="sc-label">Base</span>
-            <input type="range" id="ctrl_v5_b" min="0" max="20" step="0.1" value="0.20" oninput="syncCosto('b', this.value)">
+            <input type="range" id="ctrl_v5_b" min="0" max="1" step="0.05" value="0.20" oninput="syncCosto('b', this.value)">
             <span id="val_v5_b" class="slider-value">0.20</span>
         </div>
         <div class="sc-item">
             <span class="sc-label">Optimista</span>
-            <input type="range" id="ctrl_v5_o" min="0" max="20" step="0.1" value="0.15" oninput="syncCosto('o', this.value)">
+            <input type="range" id="ctrl_v5_o" min="0" max="1" step="0.05" value="0.15" oninput="syncCosto('o', this.value)">
             <span id="val_v5_o" class="slider-value">0.15</span>
         </div>
     </div>
